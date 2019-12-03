@@ -1,0 +1,18 @@
+list = []
+
+with open("C:/Users/james/PycharmProjects/adventofcode/text files/Day2.txt",'r') as file:
+    for i in file:
+        list.append(i)
+
+array = []
+
+for i in list[0].split(','):
+    array.append(int(i))
+
+for i in range(0,len(array),4):
+    if array[i] == 99:
+        print (array[0])
+    if array[i] == 1:
+        array[array[i+3]] = array[array[i+1]] + array[array[i+2]]
+    if array[i] == 2:
+        array[array[i+3]] = array[array[i+1]] * array[array[i+2]]
