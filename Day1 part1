@@ -1,0 +1,13 @@
+def getMass(num):
+    x = int(num/3) - 2
+    return x
+
+total = 0
+
+with open("C:/Users/james/PycharmProjects/adventofcode/text files/Day1.txt",'r') as file:
+    for module in file:
+        y = int(module)
+        x = getMass(y)
+        total += x
+
+print(total)
