@@ -1,0 +1,38 @@
+
+list = []
+
+with open("C:/Users/james/PycharmProjects/adventofcode/text files/Day2.txt",'r') as file:
+    for i in file:
+        list.append(i)
+
+def initialise():
+    global array
+    array = []
+    for i in list[0].split(','):
+        array.append(int(i))
+
+def intcode(x,y):
+    initialise()
+    array[1] = x
+    array[2] = y
+    for i in range(0,len(array),4):
+        if array[i] == 99:
+            return (array[0])
+        if array[i] == 1:
+            array[array[i+3]] = array[array[i+1]] + array[array[i+2]]
+        if array[i] == 2:
+            array[array[i+3]] = array[array[i+1]] * array[array[i+2]]
+
+
+for x in range(0,99):
+    for y in range (0,99):
+        if intcode(x,y) == 19690720:
+            print (x,y)
+            print ('100 times', x, 'plus' , y, '=', (100*x)+y)
+            break
+
+
+
+
+
+
