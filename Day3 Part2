@@ -1,0 +1,70 @@
+
+list = []
+
+with open("C:/Users/james/PycharmProjects/adventofcode/text files/Day3.txt",'r') as file:
+    for i in file:
+        list.append(i)
+
+#list = ["R75,D30,R83,U83,L12,D49,R71,U7,L72","U62,R66,U55,R34,D71,R55,D58,R83"]
+
+course1 = []
+course2 = []
+
+for i in list[0].split(','):
+    course1.append(i)
+
+for i in list[1].split(','):
+    course2.append(i)
+
+coordinates1 = []
+coordinates2 = []
+
+def linemaker(course,coordinates):
+    x = 0
+    y = 0
+    for i in range(0,len(course)):
+        if (course[i][0]) == 'R':
+            for j in range(0,int(course[i][1:len(course[i])])):
+                x += 1;
+                coordinates.append((x,y));
+        if (course[i][0]) == 'L':
+            for j in range(0,int(course[i][1:len(course[i])])):
+                x -= 1;
+                coordinates.append((x,y));
+        if (course[i][0]) == 'U':
+            for j in range(0,int(course[i][1:len(course[i])])):
+                y += 1;
+                coordinates.append((x,y));
+        if (course[i][0]) == 'D':
+            for j in range(0,int(course[i][1:len(course[i])])):
+                y -= 1;
+                coordinates.append((x,y));
+    return coordinates
+
+linemaker(course1,coordinates1)
+linemaker(course2,coordinates2)
+
+#print(len(linemaker(course1,coordinates1)))
+#print(len(linemaker(course2,coordinates2)))
+
+total = 100000000
+
+set1 = set(coordinates1)
+set2 = set(coordinates2)
+
+crossings = (set1 & set2)
+
+for i in crossings:
+    total = min(total, abs(i[0])+abs(i[1]))
+
+print(total)
+
+print(coordinates1)
+print(coordinates2)
+print(crossings)
+
+
+feweststeps = 1000000000
+for i in (crossings):
+    feweststeps = min(feweststeps,coordinates1.index(i)+coordinates2.index(i)+2)
+print(feweststeps)
