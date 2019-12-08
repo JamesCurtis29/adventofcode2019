@@ -1,0 +1,23 @@
+import re
+
+
+def passwordtest(password):
+    strpw = str(password)
+    x = False
+    if (len(strpw) == 6 and strpw[5]>=strpw[4]>=strpw[3]>=strpw[2]>=strpw[1]>=strpw[0]) and 372036 < password and password < 905158:
+        for i in range(111,1000,111):
+            if re.search(str(i),strpw) != None:
+                y = str(int(i/111))
+                strpw = strpw.replace(y,"")
+        if len(strpw)>1:
+            for i in range(1,len(strpw)):
+                if (strpw[i-1]==strpw[i]):
+                    x = True
+    return x
+
+total = 0
+for i in range(372037,905158):
+    if passwordtest(i) == True:
+        total += 1
+
+print (total)
