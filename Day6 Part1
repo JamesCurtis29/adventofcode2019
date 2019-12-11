@@ -1,0 +1,33 @@
+alist = []
+
+with open("C:/Users/james/PycharmProjects/adventofcode/text files/Day6.txt",'r') as file:
+    for i in file:
+        alist.append(i.replace("\n","").replace(")","-"))
+
+def listplanets(a):
+    planets = []
+    for i in range(0,len(a)):
+        planets.append(a[i][0:3])
+        planets.append(a[i][4:])
+        planetset = set(planets)
+        planetlist = list(planetset)
+    return planetlist
+
+listofplanets = (listplanets(alist))
+
+total = 0
+
+def countorbs(st):
+    global total
+    for j in range (0,len(alist)):
+        if alist[j][4:] == st:
+            total+=1 + countorbs(alist[j][0:3])
+    return total
+
+result = 0
+for i in range (0,len(listofplanets)):
+    result += countorbs(listofplanets[i])
+    total = 0
+
+print (result)
+
