@@ -1,0 +1,69 @@
+pixelswide = 25
+pixelshigh = 6
+
+with open("C:/Users/james/PycharmProjects/adventofcode/text files/Day8.txt",'r') as file:
+    for i in file:
+        pixelsstring = i
+
+layerscount = int(len(pixelsstring)/(pixelshigh * pixelswide))
+
+pixelslayers = []
+
+for i in range(0,layerscount):
+    pixelslayers.append([])
+    for j in range(0,pixelshigh):
+        pixelslayers[i].append([])
+
+print(pixelslayers)
+print(len(pixelslayers))
+def layerstring (pixelsstring):
+    i = 0
+    for j in range (0,layerscount):
+        for k in range (0,pixelshigh):
+            for l in range (0,pixelswide):
+                if len(pixelslayers[j][k])<pixelswide:
+                    pixelslayers[j][k].append(pixelsstring[i])
+                    i+=1
+    return pixelslayers
+layerstring(pixelsstring)
+print (pixelslayers)
+
+def findanswer(pixelslayers):
+    totalones = 0
+    totaltwos = 0
+    total = 10000000
+    layerno = -1
+    for i in range (0,layerscount):
+        newtotal = 0
+        for j in range (0,pixelshigh):
+            for k in range (0,pixelswide):
+                if pixelslayers[i][j][k] == '0':
+                    newtotal += 1
+        if newtotal < total:
+            total = newtotal
+            layerno = i
+    print(layerno)
+    for l in range(0,pixelshigh):
+        for k in range (0,pixelswide):
+            if pixelslayers[layerno][l][k] == '1':
+                totalones += 1
+            if pixelslayers[layerno][l][k] == '2':
+                totaltwos += 1
+    return totalones * totaltwos
+
+print(findanswer(pixelslayers))
+
+finalimage = pixelslayers
+
+
+for i in range (0,pixelshigh):
+    for j in range(0,pixelswide):
+        for k in range (0,layerscount):
+            if finalimage[0][i][j] != "0" and finalimage[0][i][j] != "1":
+                finalimage[0][i][j] = finalimage[k][i][j]
+
+print (finalimage)
+print ("space")
+
+for i in range(0,len(finalimage[0])):
+    print(finalimage[0][i])
