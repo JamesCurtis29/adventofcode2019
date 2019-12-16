@@ -1,0 +1,38 @@
+import math
+
+astfield = []
+
+with open("C:/Users/james/PycharmProjects/adventofcode/text files/Day10.txt",'r') as file:
+    for i in file:
+        astfield.append(i.replace("\n",""))
+
+#astfield = ['.#..#','.....','#####','....#','...##']
+
+print(astfield)
+
+width = len(astfield[0])
+height = len(astfield)
+length = width*height
+
+#def determineangle(p1,p2):
+
+astpoints = []
+for i in range(0,width):
+    for j in range (0,height):
+        if astfield[i][j] == '#':
+            astpoints.append((i,j))
+print(astpoints)
+
+astnumbs = []
+for i in range(0,len(astpoints)):
+    astnumbs.append(0)
+print(astnumbs)
+
+for i in range(0,len(astpoints)):
+    list = []
+    for j in range(0,len(astpoints)):
+        if (astpoints[i] != astpoints[j]):
+           list.append(math.degrees(math.atan2((astpoints[i][0]-astpoints[j][0]),(astpoints[i][1]-astpoints[j][1]))))
+    astnumbs[i] = len(set(list))
+
+print(max(astnumbs))
